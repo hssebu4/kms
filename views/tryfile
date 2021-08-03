@@ -1,0 +1,178 @@
+if($this->session->userdata('kms_access_status') == 1){
+                  //The chat forum departs as from the databsae modal as below
+                //The forum menu as per department 
+                $data['Menu_item_00_01_01'] = "General";
+                $data['Menu_item_00_01_02'] = "Administration";
+                $data['Menu_item_00_01_04'] = "Commercial";
+                $data['Menu_item_00_01_08'] = "Design";
+                $data['Menu_item_00_01_03'] = "Finance";
+                $data['Menu_item_00_01_07'] = "Maintenance";
+                $data['Menu_item_00_01_05'] = "Production";
+                $data['Menu_item_00_01_06'] = "Supply Chain";
+                $data['Menu_item_00_01_09'] = "I.T";
+                //The customised user details
+               if(isset($session_user_dept_id) && $session_user_dept_id == 2)
+               {
+                          //The view data to be used
+                        $data['Home_tab_title'] = "KMS | Management";
+                        $data['Side_menu_title'] = "KMS - Management";
+                        $data['Dept_name'] = "Management";
+                        //The menu items on the I.T home side
+                        $data['Menu_item_00'] = "Communicate";
+                        $data['Menu_item_04'] = "Documents";
+
+                        //The submenu item for I.T home side
+                        $data['Menu_item_00_01'] = "Chat Forum";
+                    
+                        //The submenu item for i.t document side
+                        $data['Menu_item_04_01'] = "My Files";
+                        $data['Menu_item_04_02'] = "Inbox - Files";
+                        $data['Menu_item_04_03'] = "Files Hub ";
+               }else if(isset($session_user_dept_id) && $session_user_dept_id == 5)
+               {
+                          //The view data to be used
+                        $data['Home_tab_title'] = "KMS | Production";
+                        $data['Side_menu_title'] = "KMS - Production";
+                        $data['Dept_name'] = "Production";
+                        //The menu items on the I.T home side
+                        $data['Menu_item_00'] = "Communicate";
+                        $data['Menu_item_04'] = "Documents";
+
+                        //The submenu item for I.T home side
+                        $data['Menu_item_00_01'] = "Chat Forum";
+                    
+                        //The submenu item for i.t document side
+                        $data['Menu_item_04_01'] = "My Files";
+                        $data['Menu_item_04_02'] = "Inbox - Files";
+                        $data['Menu_item_04_03'] = "Files Hub ";
+               }else if(isset($session_user_dept_id) && $session_user_dept_id == 6)
+               {
+                          //The view data to be used
+                        $data['Home_tab_title'] = "KMS | Supply Chain";
+                        $data['Side_menu_title'] = "KMS - Supply Chain";
+                        $data['Dept_name'] = "Supply";
+                        //The menu items on the I.T home side
+                        $data['Menu_item_00'] = "Communicate";
+                        $data['Menu_item_04'] = "Documents";
+
+                        //The submenu item for I.T home side
+                        $data['Menu_item_00_01'] = "Chat Forum";
+                    
+                        //The submenu item for i.t document side
+                        $data['Menu_item_04_01'] = "My Files";
+                        $data['Menu_item_04_02'] = "Inbox - Files";
+                        $data['Menu_item_04_03'] = "Files Hub ";
+               }else if(isset($session_user_dept_id) && $session_user_dept_id == 7)
+               {
+                          //The view data to be used
+                        $data['Home_tab_title'] = "KMS | Maintenance";
+                        $data['Side_menu_title'] = "KMS - Maintenance";
+                        $data['Dept_name'] = "Maintenance";
+                        //The menu items on the I.T home side
+                        $data['Menu_item_00'] = "Communicate";
+                        $data['Menu_item_04'] = "Documents";
+
+                        //The submenu item for I.T home side
+                        $data['Menu_item_00_01'] = "Chat Forum";
+                    
+                        //The submenu item for i.t document side
+                        $data['Menu_item_04_01'] = "My Files";
+                        $data['Menu_item_04_02'] = "Inbox - Files";
+                        $data['Menu_item_04_03'] = "Files Hub ";
+               }
+            
+
+            if(isset($id)){
+            
+            //Obtain the select forum chat from the data modal
+         $Fetch_FChat_Result = $this->Chat->fetch_fchat_message();
+   
+         $data['Fetch_Forum_Chat_results'] = $Fetch_FChat_Result->result_array();
+          
+          
+         foreach ($Fetch_FChat_Result->result_array() as $row)
+         {
+              
+             if($row['kms_forum'] == 8)
+            {
+              $data['DS']  = $row['kms_fchats']; 
+            }
+              else if($row['kms_forum'] == 7)
+              { 
+                $data['MT']  = $row['kms_fchats'];       
+              }else if($row['kms_forum'] == 6)
+              {
+                $data['SC']  = $row['kms_fchats']; 
+              }
+              else if($row['kms_forum'] == 5)
+              {
+                $data['PD']  = $row['kms_fchats']; 
+              }
+              else if($row['kms_forum'] == 4)
+              {
+                $data['CM']  = $row['kms_fchats']; 
+              }
+              else if($row['kms_forum'] == 3)
+              {
+                $data['FC']  = $row['kms_fchats']; 
+              }
+              else if($row['kms_forum'] == 2)
+              {
+                $data['AD']  = $row['kms_fchats']; 
+              }
+              else if($row['kms_forum'] == 1)
+              {
+                $data['GN']  = $row['kms_fchats']; 
+              }
+              else if($row['kms_forum'] == 9)
+              {
+                $data['IT']  = $row['kms_fchats']; 
+              }
+             
+               else
+               {
+                 $data['MT']  = 0; $data['SC'] = 0; $data['PD'] = 0; $data['CM'] = 0;$data['FC'] = 0;$data['AD'] = 0;$data['GN']  = 0;$data['DS']  = 0; $data['IT']  = 0; 
+               }
+            
+         }
+         //Then we call the chat forum name function as below
+       
+          //  this indicates the forum heading titles as set below on the forum chat panel on the admin side
+          $data['Forum_id']  = $id;//The forum number that has been selected by the user
+          if(($id) == 1){ $data['Forum_name'] = "General Forum";
+          }
+          else if(($id) == 2){$data['Forum_name'] = "Administration Forum";
+          }
+          else if(($id) == 3){$data['Forum_name'] = "Finance Forum";
+          }
+          else if(($id) == 4){$data['Forum_name'] = "Commercial Forum";
+          }
+          else if(($id) == 5){$data['Forum_name'] = "Production Forum";
+          }
+          else if(($id) == 6){$data['Forum_name'] = "Supply Chain Forum";
+          }
+          else if(($id) == 7){$data['Forum_name'] = "Maintenance Forum";
+          }
+          else if(($id) == 8){$data['Forum_name'] = "Design & Dev'pt Forum";
+          }
+          else if(($id) == 9){$data['Forum_name'] = "I.T";
+          }
+          else{
+           $data['Forum_name']= null;
+          }
+          
+          
+ 
+         //Then we obtain the forum chats as per the selected forum
+         $kms_user_id  = $this->session->userdata('kms_emp_id');
+         $Fetch_Forum_Result3 = $this->Chat->fetch_forum_message($id,$kms_user_id);
+         $data['Fetch_forum_chats_results'] = $Fetch_Forum_Result3->result_array();
+         
+        }else{$this->load->view('forums',$data);}
+            
+        }else{
+   
+              $this->load->helper('url');
+              redirect('/');
+        }
+        
